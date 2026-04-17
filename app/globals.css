@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
+@theme {
+  --font-pixel: var(--font-pixel), system-ui;
+  --font-retro: var(--font-retro), monospace;
+  --font-inter: var(--font-inter), sans-serif;
+  --color-health: #4CAF50;
+  --color-sky-blue-50: #f0f9ff;
+  --color-sky-blue-100: #e0f2fe;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #f0f9ff;
+  --foreground: #1e293b;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  /* Subtle grid background */
+  background-image: 
+    linear-gradient(rgba(186, 230, 253, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(186, 230, 253, 0.3) 1px, transparent 1px);
+  background-size: 40px 40px;
+  position: relative;
+}
+
+/* Custom Utilities */
+@utility glass-panel {
+  background-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+}
+
+@utility pixel-border {
+  box-shadow: 
+    0 -4px 0 0 #1e293b,
+    0 4px 0 0 #1e293b,
+    -4px 0 0 0 #1e293b,
+    4px 0 0 0 #1e293b;
+}
+
+@utility pixel-button {
+  background-color: #4CAF50;
+  color: white;
+  box-shadow: 
+    0 -4px 0 0 #1e293b,
+    0 4px 0 0 #1e293b,
+    -4px 0 0 0 #1e293b,
+    4px 0 0 0 #1e293b;
+  transition: all 0.1s;
+
+  &:hover {
+    filter: brightness(1.1);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 
+      0 -2px 0 0 #1e293b,
+      0 2px 0 0 #1e293b,
+      -4px 0 0 0 #1e293b,
+      4px 0 0 0 #1e293b;
+  }
 }
