@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { 
   Flame, 
   Zap, 
@@ -172,15 +173,17 @@ export default function Home() {
 
       {/* CTA Button */}
       <footer className="mt-auto pt-6">
-        <motion.button 
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="pixel-button w-full py-6 flex items-center justify-center gap-3 font-pixel text-[11px] tracking-tight group cursor-pointer"
-        >
-           <Scroll className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-           IMPORT AI DIET SCROLL
-           <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-        </motion.button>
+        <Link href="/import">
+          <motion.button 
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="pixel-button w-full py-6 flex items-center justify-center gap-3 font-pixel text-[11px] tracking-tight group cursor-pointer"
+          >
+             <Scroll className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+             IMPORT AI DIET SCROLL
+             <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </motion.button>
+        </Link>
       </footer>
     </main>
   );
