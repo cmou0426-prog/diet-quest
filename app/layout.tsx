@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Press_Start_2P, VT323, Inter } from "next/font/google";
 import "./globals.css";
+import Navigation from "@/components/Navigation";
 
 const pixelFont = Press_Start_2P({
   weight: "400",
@@ -34,9 +35,10 @@ export default function RootLayout({
       <body
         className={`${pixelFont.variable} ${retroFont.variable} ${inter.variable} font-inter min-h-screen flex flex-col selection:bg-health/30`}
       >
-        <div className="mx-auto w-full max-w-lg min-h-screen flex flex-col p-4 md:p-6">
+        <main className="mx-auto w-full max-w-lg min-h-screen flex flex-col p-4 md:p-6 pb-40">
           {children}
-        </div>
+        </main>
+        <Navigation />
       </body>
     </html>
   );

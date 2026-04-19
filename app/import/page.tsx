@@ -206,6 +206,7 @@ export default function ImportQuestPage() {
            </p>
         </div>
       </footer>
+      <div className="h-32 w-full shrink-0"></div>
     </main>
   );
 }

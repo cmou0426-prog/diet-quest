@@ -127,6 +127,7 @@ export default async function PlanPage() {
         </p>
         <div className="w-16 h-1 bg-slate-200 rounded-full opacity-50" />
       </footer>
+      <div className="h-32 w-full shrink-0"></div>
     </main>
   );
 }

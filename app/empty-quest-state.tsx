@@ -85,6 +85,7 @@ export default function EmptyQuestState() {
           <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
         </motion.button>
       </Link>
+      <div className="h-32 w-full shrink-0"></div>
     </div>
   );
 }

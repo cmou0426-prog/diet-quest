@@ -293,6 +293,7 @@ export default function DashboardView({ questName, targetCalories, dailyLogs }: 
           </motion.button>
         </Link>
       </footer>
+      <div className="h-32 w-full shrink-0"></div>
     </main>
   );
 }
