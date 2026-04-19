@@ -10,7 +10,10 @@ import {
   Sword, 
   Save, 
   Loader2,
-  Sparkles
+  Sparkles,
+  Zap,
+  Copy,
+  Check
 } from "lucide-react";
 import Link from "next/link";
 import { createClient } from "@/utils/supabase/client";
@@ -24,6 +27,19 @@ export default function ImportQuestPage() {
   const [rawAiText, setRawAiText] = useState("");
   const [targetCalories, setTargetCalories] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const promptTemplate = `Act as an expert sports nutritionist. Create a customized diet plan for me. My goal is [Insert Goal here, e.g., lose 10 lbs]. Please format the response clearly with Day 1 to Day 7 headings. For each day, list Breakfast, Lunch, and Dinner with exact calories and macros. Keep the formatting clean, structured, and easy to read.`;
+
+  const handleCopyPrompt = async () => {
+    try {
+      await navigator.clipboard.writeText(promptTemplate);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy spell:", err);
+    }
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -31,7 +47,6 @@ export default function ImportQuestPage() {
       if (user) {
         setUserId(user.id);
       } else {
-        // Redirect to login if no user
         router.push("/login");
       }
     };
@@ -56,8 +71,6 @@ export default function ImportQuestPage() {
       ]);
 
       if (error) throw error;
-
-      // Success! Redirect to dashboard
       router.push("/");
     } catch (error) {
       console.error("Error saving quest:", error);
@@ -93,13 +106,65 @@ export default function ImportQuestPage() {
         </p>
       </header>
 
-      {/* Main Form Container */}
+      {/* Step 1: AI Prompt Generator */}
+      <motion.section
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="glass-panel p-6 border-blue-200/50 bg-blue-50/30 flex flex-col gap-4 shadow-sm"
+      >
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Zap className="w-4 h-4 text-blue-500" />
+            <h2 className="font-pixel text-[10px] text-blue-600 tracking-wider uppercase">
+              Step 1: The Summoning Spell
+            </h2>
+          </div>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleCopyPrompt}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg font-pixel text-[8px] transition-all ${
+              copied 
+              ? "bg-health text-white" 
+              : "bg-blue-500 text-white hover:bg-blue-600 shadow-[0_4px_0_#1d4ed8]"
+            }`}
+          >
+            {copied ? (
+              <Check className="w-3 h-3" />
+            ) : (
+              <Copy className="w-3 h-3" />
+            )}
+            {copied ? "COPIED!" : "COPY PROMPT"}
+          </motion.button>
+        </div>
+        
+        <div className="bg-slate-900/90 rounded-lg p-4 border border-slate-800 relative group overflow-hidden">
+          <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none group-hover:opacity-10 transition-opacity">
+             <Sparkles size={48} className="text-blue-400" />
+          </div>
+          <p className="font-retro text-lg text-blue-100 leading-relaxed italic select-all">
+            "{promptTemplate}"
+          </p>
+        </div>
+        <p className="font-pixel text-[8px] text-slate-400 uppercase italic">
+          * Use this spell with ChatGPT or Claude to generate your plan.
+        </p>
+      </motion.section>
+
+      {/* Main Form Container - Step 2 */}
       <motion.section 
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
         className="glass-panel p-6 relative overflow-hidden flex flex-col gap-6 border-white/60 shadow-[0_0_20px_rgba(186,230,253,0.2)]"
       >
+        <div className="flex items-center gap-2 relative z-10">
+          <Scroll className="w-4 h-4 text-orange-400" />
+          <h2 className="font-pixel text-[10px] text-slate-500 tracking-wider uppercase">
+            Step 2: Paste the Ancient Wisdom
+          </h2>
+        </div>
+
         {/* Animated magical scanline */}
         <motion.div 
           animate={{ y: ["0%", "100%", "0%"] }}
