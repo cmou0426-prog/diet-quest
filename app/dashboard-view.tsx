@@ -84,6 +84,10 @@ export default function DashboardView({ questName, targetCalories, dailyLogs }: 
           <h1 className="font-pixel text-lg text-slate-900 leading-tight">
             {questName}
           </h1>
+          <Link href="/plan" className="flex items-center gap-1 mt-1 text-blue-500 hover:text-blue-600 transition-colors group">
+            <span className="font-pixel text-[8px] uppercase tracking-tighter">View Quest Scroll</span>
+            <ChevronRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </Link>
         </div>
         <motion.div 
           whileHover={{ scale: 1.05 }}
